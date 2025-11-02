@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="275pt" height="198pt" viewBox="0.00 0.00 275.36 198.10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 194.1)">
+<title>HomeAutomation</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-194.1 271.36,-194.1 271.36,4 -4,4"></polygon>
+<!-- s -->
+<g id="node1" class="node">
+<title>s</title>
+<polygon fill="#dddddd" stroke="#777777" stroke-width="1.2" points="169.89,-119.2 105.66,-119.2 105.66,-83.2 169.89,-83.2 169.89,-119.2"></polygon>
+<text text-anchor="middle" x="137.77" y="-97" font-family="Segoe UI" font-size="14.00" fill="#222222">Système</text>
+</g>
+<!-- e -->
+<g id="node3" class="node">
+<title>e</title>
+<polygon fill="#dddddd" stroke="#777777" stroke-width="1.2" points="137.44,-36 70.14,-36 70.14,0 137.44,0 137.44,-36"></polygon>
+<text text-anchor="middle" x="103.79" y="-13.8" font-family="Segoe UI" font-size="14.00" fill="#222222">Éclairage</text>
+</g>
+<!-- s&#45;&gt;e -->
+<g id="edge4" class="edge">
+<title>s-&gt;e</title>
+<path fill="none" stroke="#33aa33" stroke-width="1.6" d="M126.43,-73.44C122.82,-64.59 118.82,-54.79 115.19,-45.93"></path>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="123.7,-74.15 129.31,-80.5 128.88,-72.03 123.7,-74.15"></polygon>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="117.84,-45 112.23,-38.66 112.66,-47.12 117.84,-45"></polygon>
+<text text-anchor="middle" x="104.15" y="-61.95" font-family="Segoe UI" font-size="9.00" fill="#222222">EnOcean</text>
+</g>
+<!-- v -->
+<g id="node4" class="node">
+<title>v</title>
+<polygon fill="#dddddd" stroke="#777777" stroke-width="1.2" points="267.36,-131.07 213.36,-131.07 213.36,-95.07 267.36,-95.07 267.36,-131.07"></polygon>
+<text text-anchor="middle" x="240.36" y="-108.87" font-family="Segoe UI" font-size="14.00" fill="#222222">Volets</text>
+</g>
+<!-- s&#45;&gt;v -->
+<g id="edge5" class="edge">
+<title>s-&gt;v</title>
+<path fill="none" stroke="#33aa33" stroke-width="1.6" d="M180.51,-106.15C187.88,-107 195.49,-107.88 202.71,-108.71"></path>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="180.9,-103.37 172.64,-105.24 180.26,-108.94 180.9,-103.37"></polygon>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="202.26,-111.48 210.53,-109.62 202.9,-105.92 202.26,-111.48"></polygon>
+<text text-anchor="middle" x="191.31" y="-99.3" font-family="Segoe UI" font-size="9.00" fill="#222222">EnOcean</text>
+</g>
+<!-- fp -->
+<g id="node6" class="node">
+<title>fp</title>
+<polygon fill="#dddddd" stroke="#777777" stroke-width="1.2" points="67.73,-124.88 0,-124.88 0,-88.88 67.73,-88.88 67.73,-124.88"></polygon>
+<text text-anchor="middle" x="33.87" y="-102.68" font-family="Segoe UI" font-size="14.00" fill="#222222">Fil Pilote</text>
+</g>
+<!-- s&#45;&gt;fp -->
+<g id="edge6" class="edge">
+<title>s-&gt;fp</title>
+<path fill="none" stroke="#33aa33" stroke-width="1.6" d="M105.18,-102.98C96.71,-103.45 87.44,-103.95 78.47,-104.44"></path>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="78.39,-101.64 70.56,-104.88 78.7,-107.24 78.39,-101.64"></polygon>
+<text text-anchor="middle" x="86.51" y="-95.9" font-family="Segoe UI" font-size="9.00" fill="#222222">EnOcean</text>
+</g>
+<!-- i -->
+<g id="node2" class="node">
+<title>i</title>
+<polygon fill="#dddddd" stroke="#777777" stroke-width="1.2" points="266.49,-54.38 178.18,-54.38 178.18,-18.38 266.49,-18.38 266.49,-54.38"></polygon>
+<text text-anchor="middle" x="222.34" y="-32.18" font-family="Segoe UI" font-size="14.00" fill="#222222">Interrupteurs</text>
+</g>
+<!-- i&#45;&gt;s -->
+<g id="edge1" class="edge">
+<title>i-&gt;s</title>
+<path fill="none" stroke="#33aa33" stroke-width="1.6" d="M198.33,-54.78C189.49,-61.56 179.34,-69.34 169.9,-76.58"></path>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="168.41,-74.19 163.76,-81.28 171.81,-78.64 168.41,-74.19"></polygon>
+<text text-anchor="middle" x="163.77" y="-71.34" font-family="Segoe UI" font-size="9.00" fill="#222222">EnOcean</text>
+</g>
+<!-- i&#45;&gt;e -->
+<g id="edge2" class="edge">
+<title>i-&gt;e</title>
+<path fill="none" stroke="#33aa33" stroke-width="1.6" d="M177.86,-29.48C168.11,-27.97 157.79,-26.37 148.06,-24.86"></path>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="148.5,-22.1 140.16,-23.64 147.64,-27.63 148.5,-22.1"></polygon>
+<text text-anchor="middle" x="157.79" y="-18.27" font-family="Segoe UI" font-size="9.00" fill="#222222">EnOcean</text>
+</g>
+<!-- i&#45;&gt;v -->
+<g id="edge3" class="edge">
+<title>i-&gt;v</title>
+<path fill="none" stroke="#33aa33" stroke-width="1.6" d="M226.61,-54.56C228.72,-63.56 231.33,-74.65 233.7,-84.73"></path>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="230.94,-85.25 235.5,-92.4 236.4,-83.97 230.94,-85.25"></polygon>
+<text text-anchor="middle" x="214.82" y="-77.29" font-family="Segoe UI" font-size="9.00" fill="#222222">EnOcean</text>
+</g>
+<!-- t -->
+<g id="node5" class="node">
+<title>t</title>
+<polygon fill="#dddddd" stroke="#777777" stroke-width="1.2" points="157.18,-190.1 77.42,-190.1 77.42,-154.1 157.18,-154.1 157.18,-190.1"></polygon>
+<text text-anchor="middle" x="117.3" y="-167.9" font-family="Segoe UI" font-size="14.00" fill="#222222">Thermostat</text>
+</g>
+<!-- t&#45;&gt;s -->
+<g id="edge7" class="edge">
+<title>t-&gt;s</title>
+<path fill="none" stroke="#33aa33" stroke-width="1.6" d="M122.57,-153.84C124.71,-146.46 127.22,-137.76 129.58,-129.58"></path>
+<polygon fill="#33aa33" stroke="#33aa33" stroke-width="1.6" points="132.25,-130.44 131.77,-121.97 126.87,-128.88 132.25,-130.44"></polygon>
+<text text-anchor="middle" x="111.07" y="-139.26" font-family="Segoe UI" font-size="9.00" fill="#222222">EnOcean</text>
+</g>
+<!-- t&#45;&gt;fp -->
+</g>
+</svg>
