@@ -20,7 +20,7 @@ Avec la fin du service Flexom et la reprise par Building Care de la maintenance 
 | RTS         | ★        | ★★★                    | Le remplacement total du thermostat est moins onéreux | 
 | IO          | ☆        | ☆                    | Aucune garantie de compatibilité                      |
 
-<div style="page-break-after: always;"></div>
+
 
 ## Equipements
 
@@ -37,7 +37,7 @@ Avec la fin du service Flexom et la reprise par Building Care de la maintenance 
 ![Flexom](img/Flexom-dark.dot.svg#gh-dark-mode-only)
 
 
-<div style="page-break-after: always;"></div>
+
 
 # Remplacement vers un système open-source
 
@@ -57,7 +57,7 @@ Avec la fin du service Flexom et la reprise par Building Care de la maintenance 
 | Thermostat           | SONOFF SNZB-02D              | 20€     | Alternative Zigbee                     |
 | Fil Pilote chauffage | NodOn Fil pilote             | 55€/47€ | EnOcean/Zigbee                         |
 
-<div style="page-break-after: always;"></div>
+
 
 ## Solutions
 
@@ -69,7 +69,7 @@ Avec la fin du service Flexom et la reprise par Building Care de la maintenance 
 | EnOcean        | ★★★★        | ★★             | ★ |                                                |
 | Mixte          | ★★★★★        | ★★             | ★★ |                                                |
 
-<div style="page-break-after: always;"></div>
+
 
 ### Solution sans domotique
 
@@ -84,11 +84,12 @@ Avec la fin du service Flexom et la reprise par Building Care de la maintenance 
 | Pont EnOcean         | USB dongle 300 EnOcean       | 50€   | 1        | 50€   |
 | **Total**            |                              |       |          | 130€  |
 
-<div style="page-break-after: always;"></div>
+
 
 ### Solution minimale
 
-⚠️ Cette solution part du principe que la box Tahoma Switch peut se connecter aux volets roulants.
+> [!WARNING]
+> Cette solution part du principe que la box Tahoma Switch peut se connecter aux volets roulants.
 
 ![Minimale](img/Minimale.dot.svg#gh-light-mode-only)
 ![Minimale](img/Minimale-dark.dot.svg#gh-dark-mode-only)
@@ -102,7 +103,7 @@ Avec la fin du service Flexom et la reprise par Building Care de la maintenance 
 | Pont IO/RTS          | Somfy Tahoma switch          | 200€  | 1        | 200€  |
 | **Total**            |                              |       |          | 330€  |
 
-<div style="page-break-after: always;"></div>
+
 
 ### Solution EnOcean
 
@@ -122,7 +123,7 @@ Cette solution utilise en intégralité le protocole EnOcean et est totalement h
 | Fil Pilote chauffage | NodOn Fil pilote             | 55€  | 1        | 55€   |
 | **Total**            |                              |      |          | 639€  |
 
-<div style="page-break-after: always;"></div>
+
 
 ### Solution mixte
 
@@ -143,7 +144,7 @@ Au vu de la popularité de EnOcean par rapport à Zigbee, un modèle utilisant l
 | Fil Pilote chauffage | NodOn Fil pilote             | 47€  | 1        | 47€   |
 | **Total**            |                              |      |          | 537€  |
 
-<div style="page-break-after: always;"></div>
+
 
 # Installation
 
@@ -158,16 +159,20 @@ Requiert:
 Options:
 * SONOFF dongle Zigbee ([Amazon](https://www.amazon.fr/SONOFF-Coordinator-Universelle-Passerelle-Assistant/dp/B09KXTCMSC))
 
-⚠️ En cours d'élaboration.
+> [!WARNING]
+> En cours d'élaboration.
 
 ## Remplacement des volets roulants
 
-⚠️ En cours d'élaboration.
+> [!WARNING]
+> En cours d'élaboration.
 
 ## Remplacement du thermostat
 
-⚠️ En cours d'élaboration.
+> [!WARNING]
+> En cours d'élaboration.
 
 ## Remplacement des éclairages
 
-⚠️ En cours d'élaboration.
+> [!WARNING]
+> En cours d'élaboration.

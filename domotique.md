@@ -13,7 +13,7 @@
     s4::before { content: "★★★★"; }
     s5::before { content: "★★★★★"; }
 
-    warning, info, success, error {
+    note, tip, important, warning, caution, success, error {
         display: flex;
         align-items: stretch;
         box-sizing: border-box;
@@ -24,7 +24,7 @@
         line-height: 1; 
     }
 
-    warning::before, info::before, success::before, error::before {
+    note::before, tip::before, important::before, warning::before, caution::before, success::before, error::before {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,10 +33,16 @@
         margin-right: 5px
     }
 
+    note { border: 1px solid #001ec7ff; background: linear-gradient( #e0e6ff, #c2d2ff); }
+    note::before { content:"ℹ️"; }
+    tip { border: 1px solid #00a64f; background: linear-gradient( #e0ffe8, #c2ffd2); }
+    tip::before { content:"💡"; }
+    important { border: 1px solid #7a00c7; background: linear-gradient( #f0e0ff, #e0c2ff); }
+    important::before { content:"❗️"; }
     warning { border: 1px solid #c79a00; background: linear-gradient( #fff8e0, #fff4c2); }
     warning::before { margin-top: -3px; content: "⚠️"; }
-    info { border: 1px solid #001ec7ff; background: linear-gradient( #e0e6ff, #c2d2ff); }
-    info::before { content:"ℹ️"; }
+    caution { border: 1px solid #c70000ff; background: linear-gradient( #ffe0e0, #ffc2c2); }
+    caution::before { content:"❌"; }
     success { border: 1px solid #38c700ff; background: linear-gradient( #e6ffe0, #c9ffc2); }
     success::before { content:"✅"; }
     error { border: 1px solid #c70000ff; background: linear-gradient( #ffe0e0, #ffc2c2); }

@@ -75,9 +75,12 @@ def main():
 
     text = input_path.read_text(encoding="utf-8")
     text = strip_style_blocks(text)
-    text = unwrap_html_tags(text, "warning", "⚠️ ")
-    text = unwrap_html_tags(text, "info", "ℹ️ ")
-    text = unwrap_html_tags(text, "success", "✅ ")
+    text = unwrap_html_tags(text, "warning", "> [!WARNING]\n> ")
+    text = unwrap_html_tags(text, "note", "> [!NOTE]\n> ")
+    text = unwrap_html_tags(text, "important", "> [!IMPORTANT]\n> ")
+    text = unwrap_html_tags(text, "tip", "> [!TIP]\n> ")
+    text = unwrap_html_tags(text, "caution", "> [!CAUTION]\n> ")
+    text = unwrap_html_tags(text, "success", "✅")
     text = unwrap_html_tags(text, "error", "❌ ")
     text = unwrap_html_tags(text, "s0", "☆")
     text = unwrap_html_tags(text, "s1", "★")
@@ -85,6 +88,7 @@ def main():
     text = unwrap_html_tags(text, "s3", "★★★")
     text = unwrap_html_tags(text, "s4", "★★★★")
     text = unwrap_html_tags(text, "s5", "★★★★★")
+    text = unwrap_html_tags(text, "[^\\s]+")
     text = add_svg_theme(text)
     output_path.write_text(text, encoding="utf-8")
 
