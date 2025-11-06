@@ -52,7 +52,7 @@ def invert_svg(input_path: Path, output_path: Path) -> None:
     output_path.write_text(svg_text, encoding="utf-8")
 
 def add_svg_theme(text: str) -> str:
-    pattern = r'!\[([^\]]*)\]\(([^)]+\.svg)\)'
+    pattern = r'!\[([^\]]*)\]\((img/[^)]+\.svg)\)'
     
     def repl(match):
         alt_text, svg_path = match.groups()

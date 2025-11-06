@@ -151,6 +151,9 @@ Au vu de la popularité de EnOcean par rapport à Zigbee, un modèle utilisant l
 Pour le système de domotique j'ai choisi la Raspberry Pi et Home Assistant qui sont des produits très bien supportés par la communauté open-source.
 Des Box domotiques préinstallées sont disponibles sur le marché à un cout supérieur et sont moins flexibles en cas de panne.
 
+> [!NOTE]
+> Toutes les références sont proposées à titre indicatif.
+
 ## Mise en place du système domotique
 
 Requiert:
@@ -160,18 +163,94 @@ Requiert:
 * Carte SD 128Go Classe A2 ([Amazon](https://www.amazon.fr/SanDisk-microSDXC-Adaptateur-RescuePRO-Performance/dp/B09X7DNF6G))
 
 Options:
-* Rail Din pour Raspberry Pi ([Amazon](www.amazon.fr/GeeekPi-Raspberry-Boîtier-Cooling-Electrical/dp/B0D19T5NYP))
+* Boitier DIN Rail pour Raspberry Pi ([Amazon](www.amazon.fr/GeeekPi-Raspberry-Boîtier-Cooling-Electrical/dp/B0D19T5NYP))
 * SONOFF dongle Zigbee ([Amazon](https://www.amazon.fr/SONOFF-Coordinator-Universelle-Passerelle-Assistant/dp/B09KXTCMSC))
 
-Suivez le guide d'installation [Home Assistant](https://www.home-assistant.io/installation/raspberrypi).
+* Suivez le guide d'installation de [Home Assistant](https://www.home-assistant.io/installation/raspberrypi).
 
-> [!WARNING]
-> En cours d'élaboration.
+### Zigbee
 
-## Remplacement des volets roulants
+Pour l'intégration Zigbee, le plugin Zigbee2MQTT est réputée plus stable que le plugin officiel ZHA.
 
-> [!WARNING]
-> En cours d'élaboration.
+* Suivez le processus d'installation de [Zigbee2MQTT](https://www.hacf.fr/zigbee2mqtt-config).
+  * Dans les intégrations, commencez par désactiver ZHA
+  * Allez sur la page d'installation des plugins:
+![Plugins](img/plugins.png)
+  * Installez Mosquitto et Zigbee2MQTT:
+    * Mosquitto:
+    [![](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)
+    * Zigbee2MQTT:
+      [![intégration Zigbee2MQTT](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/zigbee2mqtt/hassio-zigbee2mqtt)
+
+
+    ![MQTT](img/plugins_mqtt.png)
+  * Allez sur la page de configuration de Mosquitto puis Zigbee2MQTT pour les démarrer et les configurer:
+    ![alt text](img/plugins_mqtt2.png)
+  * Choisissez le dongle Zigbee:
+    ![alt text](img/plugins_mqtt3.png)
+  * Une fois démarré, allez de nouveau sur l'interface Zigbee2MQTT et activez la découverte d'appareils:
+    ![alt text](img/plugins_mqtt4.png)
+  * Ajoutez et renommez vos équipements:
+    ![alt text](img/plugins_mqtt5.png)
+
+
+### EnOcean
+
+> [!CAUTION]
+> Etude de faisabilité en cours.
+
+L'intégration par défaut de EnOcean pour Home Assistant nécessite une configuration complexe des équpements, nous allons donc en utiliser une autre. L'intégration EnOcean choisie se base aussi sur l'architecture MQTT et est sortie en version 1.0 en octobre 2025.
+
+* Suivez le processus d'installation de [EnOceanMQTT](https://github.com/ChristopheHD/HA_enoceanmqtt-addon)
+  * Allez sur la page d'installation des plugins:
+![Plugins](img/plugins.png)
+  * Installez Mosquitto si ce n'est pas déjà fait, l'éditeur éditeur de texte et EnOceanMQTT:
+    * Mosquitto:
+      [![intégration Mosquitto](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)
+    * Editeur:
+      [![intégration Editeur de texte](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_configurator)
+    * EnOcean:
+      [![intégration EnOcean](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/ChristopheHD/HA_enoceanmqtt-addon)
+
+    ![EnOcean](img/plugins_enocean.png)
+  * Créez et éditez le fichier `enoceanmqtt.devices`
+    ![Edition devices EnOcean](img/plugins_enocean2.png)
+    Les interrupteurs utilisent le code EEP F6-02-01 et les éclairages le code EEP D2-01-12.
+    > [!WARNING]
+> Il est recommandé de récupérer l'addresse de la passerelle avant l'arret des services Flexom. Vous devrez changer le BaseID de votre clé pour correspondre à la passerelle (décrit plus bas).
+    ```yaml
+    [passerelle_flexom]
+    address         = 0xFA57C0DE
+    ignore          = 1
+
+    [interrupteur_chambre_1]
+    address         = 0xDEADBEEF
+    rorg            = 0xF6
+    func            = 0x02
+    type            = 0x01
+
+    [eclairage_chambre_1]
+    address         = 0xABADC0DE
+    rorg            = 0xD2
+    func            = 0x01
+    type            = 0x12
+    sender          = 0xFA57C0DE
+    ```
+    Pour récupérer les addresses des équipements, vous disposez de 3 méthodes.
+    * Le code est écrit à l'arrière des interrupteurs ou sur les éclairages.
+    * Il est disponible sur l'application Flexom depuis le menu suivant:
+    `Menu principal`  → `Fonctions avancées, Paramètres` → `Mes objets`
+    Puis `Objets` → `<objet>` → `Infos` → `Détails` → `ComID`
+    * Depuis les logs de l'application, quand vous appuyez sur un interrupteur, l'interrupteur et l'éclairage envoient des informations:
+    ![Logs EnOcean](img/plugins_enocean3.png)
+  * Pour changer le BaseID de votre clé, téléchargez le logiciel [Dolphin View](https://www.enocean.com/en/product/dolphinview) (nécessite de créer un compte).
+  > [!CAUTION]
+> Etude de faisabilité en cours, sans changer le BaseID, il n'est pas possible de controller les appareils depuis Home Assistant.
+  * Réaffectez et renommez les appareils créés:
+  ![Affectation ](img/plugins_enocean4.png)
+  * Une fois la migration effectuée, vous pourrez controller vos luminaires depuis Home Assistant.
+  ![alt text](img/plugins_enocean5.png)
+      
 
 ## Remplacement du thermostat
 
@@ -179,6 +258,11 @@ Suivez le guide d'installation [Home Assistant](https://www.home-assistant.io/in
 > En cours d'élaboration.
 
 ## Remplacement des éclairages
+
+> [!WARNING]
+> En cours d'élaboration.
+
+## Remplacement des volets roulants
 
 > [!WARNING]
 > En cours d'élaboration.
