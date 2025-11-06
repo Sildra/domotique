@@ -240,7 +240,7 @@ Pour l'intégration Zigbee, le plugin Zigbee2MQTT est réputée plus stable que 
 
 <caution>Etude de faisabilité en cours.</caution>
 
-L'intégration par défaut de EnOcean pour Home Assistant nécessite une configuration complexe des équpements, nous allons donc en utiliser une autre. L'intégration EnOcean choisie se base aussi sur l'architecture MQTT et est sortie en version 1.0 en octobre 2025.
+L'intégration par défaut de EnOcean pour Home Assistant nécessite une configuration complexe des équipements, nous allons donc en utiliser une autre. L'intégration EnOcean choisie se base aussi sur l'architecture MQTT et est sortie en version 1.0 en octobre 2025.
 
 * Suivez le processus d'installation de [EnOceanMQTT](https://github.com/ChristopheHD/HA_enoceanmqtt-addon)
   * Allez sur la page d'installation des plugins:
@@ -257,7 +257,7 @@ L'intégration par défaut de EnOcean pour Home Assistant nécessite une configu
   * Créez et éditez le fichier `enoceanmqtt.devices`
     ![Edition devices EnOcean](img/plugins_enocean2.png)
     Les interrupteurs utilisent le code EEP F6-02-01 et les éclairages le code EEP D2-01-12.
-    <warning>Il est recommandé de récupérer l'addresse de la passerelle avant l'arret des services Flexom. Vous devrez changer le BaseID de votre clé pour correspondre à la passerelle (décrit plus bas).</warning>
+    <warning>Il est recommandé de récupérer l'adresse de la passerelle avant l'arrêt des services Flexom. Vous devrez changer le BaseID de votre clé pour correspondre à la passerelle (décrit plus bas).</warning>
     ```yaml
     [passerelle_flexom]
     address         = 0xFA57C0DE
