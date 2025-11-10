@@ -238,8 +238,6 @@ Pour l'intégration Zigbee, le plugin Zigbee2MQTT est réputée plus stable que 
 
 ### EnOcean
 
-<caution>Etude de faisabilité en cours.</caution>
-
 L'intégration par défaut de EnOcean pour Home Assistant nécessite une configuration complexe des équipements, nous allons donc en utiliser une autre. L'intégration EnOcean choisie se base aussi sur l'architecture MQTT et est sortie en version 1.0 en octobre 2025.
 
 * Suivez le processus d'installation de [EnOceanMQTT](https://github.com/ChristopheHD/HA_enoceanmqtt-addon)
@@ -252,46 +250,50 @@ L'intégration par défaut de EnOcean pour Home Assistant nécessite une configu
       [![intégration Editeur de texte](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_configurator)
     * EnOcean:
       [![intégration EnOcean](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/ChristopheHD/HA_enoceanmqtt-addon)
-
     ![EnOcean](img/plugins_enocean.png)
-  * Récupérez les addresses des équipements, vous disposez de 3 méthodes.
-    <warning>Il est recommandé de récupérer l'adresse de la passerelle avant l'arrêt des services Flexom. Vous devrez changer le BaseID de votre clé pour correspondre à la passerelle.</warning>
-    * Le code est écrit à l'arrière des interrupteurs ou sur les éclairages.
-    * Il est disponible sur l'application Flexom depuis le menu suivant:
-    `Menu principal`  → `Fonctions avancées, Paramètres` → `Mes objets`
-    Puis `Objets` → `<objet>` → `Infos` → `Détails` → `ComID`
-    * Depuis les logs de l'application, quand vous appuyez sur un interrupteur, l'interrupteur et l'éclairage envoient des informations:
-    ![Logs EnOcean](img/plugins_enocean3.png)
-  * Créez et éditez le fichier `enoceanmqtt.devices`
-    ![Edition devices EnOcean](img/plugins_enocean2.png)
-    Les interrupteurs utilisent le code EEP F6-02-01 et les éclairages le code EEP D2-01-12.
-    ```yaml
-    [passerelle_flexom]
-    address         = 0xFA57C0DE
-    ignore          = 1
 
-    [interrupteur_chambre_1]
-    address         = 0xDEADBEEF
-    rorg            = 0xF6
-    func            = 0x02
-    type            = 0x01
 
-    [eclairage_chambre_1]
-    address         = 0xABADC0DE
-    rorg            = 0xD2
-    func            = 0x01
-    type            = 0x12
-    ```
-  * Pour changer le BaseID de votre clé, téléchargez le logiciel [Dolphin View](https://www.enocean.com/en/product/dolphinview) (nécessite de créer un compte).
-  * Ouvrez le logiciel et exécutez les commandes comme décrites sur l'image.
-  <caution>Le changement de BaseID est limité à 10 fois sur les clés EnOcean.</caution>
-  La commande en vert permet de récupérer l'ID courant de la clé.
-  La commande en rouge permet de changer l'ID de la clé. Utilisez l'ID votre ancienne passerelle.
-  ![Remplacement ID passerelle](img/plugins_enocean6.png)
-  * Réaffectez et renommez les appareils créés:
-  ![Affectation EnOcean](img/plugins_enocean4.png)
-  * Une fois la migration effectuée, vous pourrez controller vos luminaires depuis Home Assistant.
-  ![Utilisation EnOcean](img/plugins_enocean5.png)
+#### Récupération des IDs EnOcean
+
+  vous disposez de 3 méthodes.
+<warning>Il est recommandé de récupérer l'adresse de la passerelle avant l'arrêt des services Flexom. Vous devrez changer le BaseID de votre clé pour correspondre à la passerelle.</warning>
+
+* Le code est écrit à l'arrière des interrupteurs ou sur les éclairages.
+* Il est disponible sur l'application Flexom depuis le menu suivant:
+`Menu principal`  → `Fonctions avancées, Paramètres` → `Mes objets`
+Puis `Objets` → `<objet>` → `Infos` → `Détails` → `ComID`
+* Depuis les logs de l'application, quand vous appuyez sur un interrupteur, l'interrupteur et l'éclairage envoient des informations:
+![Logs EnOcean](img/plugins_enocean3.png)
+* Créez et éditez le fichier `enoceanmqtt.devices`
+![Edition devices EnOcean](img/plugins_enocean2.png)
+Les interrupteurs utilisent le code EEP F6-02-01 et les éclairages le code EEP D2-01-12.
+```yaml
+[passerelle_flexom]
+address         = 0xFA57C0DE
+ignore          = 1
+
+[interrupteur_chambre_1]
+address         = 0xDEADBEEF
+rorg            = 0xF6
+func            = 0x02
+type            = 0x01
+
+[eclairage_chambre_1]
+address         = 0xABADC0DE
+rorg            = 0xD2
+func            = 0x01
+type            = 0x12
+```
+* Pour changer le BaseID de votre clé, téléchargez le logiciel [Dolphin View](https://www.enocean.com/en/product/dolphinview) (nécessite de créer un compte).
+* Ouvrez le logiciel et exécutez les commandes comme décrites sur l'image.
+<caution>Le changement de BaseID est limité à 10 fois sur les clés EnOcean.</caution>
+La commande en vert permet de récupérer l'ID courant de la clé.
+La commande en rouge permet de changer l'ID de la clé. Utilisez l'ID votre ancienne passerelle.
+![Remplacement ID passerelle](img/plugins_enocean6.png)
+* Réaffectez et renommez les appareils créés:
+![Affectation EnOcean](img/plugins_enocean4.png)
+* Une fois la migration effectuée, vous pourrez controller vos luminaires depuis Home Assistant.
+![Utilisation EnOcean](img/plugins_enocean5.png)
       
 
 ## Remplacement du thermostat
@@ -300,7 +302,23 @@ L'intégration par défaut de EnOcean pour Home Assistant nécessite une configu
 
 ## Remplacement des éclairages
 
-<warning>En cours d'élaboration.</warning>
+Les éclairages préinstallés disposent de plusieurs associations :
+* L'association point à point avec les interrupteurs (canal 1 avec interrupteur AI et AO par ex.)
+* L'association avec la passerelle EnOcean
+
+Dans ce cas, la passerelle ne communique pas directement avec les éclairages en cas d'appui sur l'un des boutons. Aucune automatisation n'est nécessaire pour faire fonctionner vos appareils.
+
+Il est cependant possible d'appairer d'autres appareils aux boutons. Les volets roulants sont un exemple :
+* `BI` (la touche droite en bas) est associée à `fermer les volets`
+* `BO` (la touche droite en haut) est associée à `ouvrir les volets`
+* `AO+BO` (les touches en haut) est associée à `arrêter les volets`
+
+Dans l'exemple ci-dessous, nous associons la touche `AI+BI` à la commutation d'un éclairage:
+* Allez dans `Paramètres` → `Automatisation` → `Créer une automatisation`
+* Associez `AI+BI` à l'action de commutation
+![Automate commutation](img/automate1.png)
+
+<note>Si vous utilisez ce genre d'automatisation, faites attention à l'association des actions simples AI. Il vous faudra ajouter une action AI et non-BI.</note>
 
 ## Remplacement des volets roulants
 
