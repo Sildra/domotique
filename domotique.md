@@ -298,7 +298,144 @@ La commande en rouge permet de changer l'ID de la clé. Utilisez l'ID votre anci
 
 ## Remplacement du thermostat
 
-<warning>En cours d'élaboration.</warning>
+Pour la partie thermostat, nous allons utiliser [Versatile Thermostat](https://github.com/jmcollin78/versatile_thermostat/blob/main/README-fr.md). L'installation se fait à l'aide de [HACS](https://hacs.xyz).
+
+Requiert:
+* Capteur de température
+
+Options:
+* Fil pilote (remplace le fil pilote Somfy de votre tableau électrique)
+* Détecteurs d'ouverture de fenêtre
+
+### Mise en place
+
+* Suivez le guide d'installation de [HACS](https://hacs.xyz/docs/use/configuration/basic)
+* Dans HACS, ajoutez les modules suivants:
+  * Versatile Thermostat et Versatile Thermostat UI
+  * Plotly Graph Card pour afficher de jolis graphes
+![Installation Thermostat](img/thermostat1.png)
+ * Redémarrez Home Assistant une fois les modules installés
+
+* Nous aurons besoin de quelques capteurs supplémentaires pour la configuration de Versatile Thermostat.
+  * Dans la configuration `config/configuration.yaml` YAML, ajoutez la ligne suivante:
+  `template: !include template.yaml`.
+  * Dans ce nouveau fichier, ajoutez un capteur reprenant les informations météo internet
+  * Nous en profiterons pour ajouter un capteur de température de consigne que nous afficherons dans le graphe
+```yaml
+# Début du fichier config/template.yaml
+- sensor:
+  - name: "Température extérieure"
+    unique_id: template_temperature_external
+    device_class: temperature
+    unit_of_measurement: "°C"
+    # Capteur météo en provenance d'internet
+    state: "{{ state_attr('weather.forecast_home', 'temperature') }}"
+    icon: mdi:home-thermometer-outline
+
+  - name: "Température consigne"
+    unique_id: template_temperature_target
+    device_class: temperature
+    unit_of_measurement: "°C"
+    # Récupération de la consigne du thermostat que nous allons créer
+    state: "{{ state_attr('climate.vtherm', 'temperature') }}"
+    icon: mdi:thermostat-cog
+```
+* Les noms des entités sont disponibles dans `Outils de développement` → `Etats`
+![Entités](img/thermostat2.png)
+* Vérifiez la configuration à partir du menu `Outils de développement` et redémarrez Home Assistant 
+* Créez le thermostat : `Paramètres` → `Appareils et services` → `Ajouter une intégration`
+* Puis `Versatile Thermostat` → `Thermostat sur un switch`
+* Remplissez les [information nécessaires](https://github.com/jmcollin78/versatile_thermostat/blob/main/documentation/fr/base-attributes.md):
+  * Nom: `VTherm`
+  * Capteur de température
+  * Durée du cycle: `15`
+  * Capteur de température extérieure: `Température extérieure`
+* Remplissez le [sous-jacent](https://github.com/jmcollin78/versatile_thermostat/blob/main/documentation/fr/over-switch.md#configuration) (fil pilote)
+<tip>Pour tester la fonctionnalité, il n'est pas nécessaire de posséder l'équipement. Vous pouvez en créer un virtuel sur cette fenêtre de configuration.</tip>
+* Ajoutez la fonction de détection de fenêtre, si vous n'avez pas de capteur, cette fonctionnalité s'enclenchera sur une chute de température de plus de 3°C/h.
+* Validez la création du thermostat.
+* Si le nom de votre thermostat est différent de `VTherm`, modifiez le fichier de configuration `config/template.yaml` en accord avec ce nouveau nom.
+
+Il est toujours possible de modifier le thermostat créé à partir de `Paramètres` → `Appareils et services` → `Versatile Thermostat configuration`.
+
+### Tableau de bord
+
+Un tableau de bord peut permettre de rapidement valider le comportement de notre thermostat.
+
+* Allez dans `Paramètres` → `Tableaux de bord` → `Ajouter un tableau de bord` → `Tableau de bord vide`
+* Dans une nouvelle section, ajoutez les cartes `Versatile Thermostat Climate Card`, `Prévisions météo` et `Plotly Graph Card`
+* Pour la configuration `Plotly Graph Card`, ouvrez l'éditeur de code et utilisez la configuration suivante:
+
+```yaml
+type: custom:plotly-graph
+hours_to_show: 24
+refresh_interval: 10*
+grid_options:
+  columns: full
+  rows: 6
+defaults:
+  entity:
+    connectgaps: true
+    show_value: true
+entities:
+  - entity: sensor.temperature_exterieure
+    name: Extérieur
+    line:
+      width: 2
+  - entity: sensor.thermostat_temperature
+    name: Intérieur
+    line:
+      width: 2
+  - entity: sensor.vtherm_temperature_slope
+    name: Δ °C
+    yaxis: y2
+  - entity: sensor.vtherm_power_percent
+    name: Puissance
+    fill: tozeroy
+    yaxis: y3
+  - entity: sensor.temperature_consigne
+    name: Consigne
+layout:
+  xaxis:
+    rangeselector:
+      font:
+        color: rgba(255,255,255,0.8)
+      x: 1
+      xanchor: right
+      bgcolor: rgba(0,0,0,0.2)
+      activecolor: rgba(255,255,255,0.1)
+      buttons:
+        - count: 6
+          step: hour
+        - count: 1
+          step: day
+        - count: 7
+          step: day
+        - count: 30
+          step: day
+  yaxis2:
+    rangemode: tozero
+    zeoline: true
+    showticklabels: false
+    showgrid: false
+    showline: false
+    ticks: ""
+    title: ""
+    fixedrange: true
+    range:
+      - -5
+      - 5
+  yaxis3:
+    visible: false
+    fixedrange: true
+    range:
+      - -2
+      - 102
+```
+
+* Adaptez les paramètres en fonction de vos besoins.
+
+![Tableau de bord thermostat](img/thermostat3.png)
 
 ## Remplacement des éclairages
 
